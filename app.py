@@ -74,7 +74,8 @@ def index():
             filepath = os.path.join(app.config["UPLOAD_FOLDER"], file.filename)
             file.save(filepath)
             data = analizar_reporte(filepath)
-            rendered = render_template("report.html", info=data, fecha=datetime.now().strftime("%d/%m/%Y %H:%M:%S"))
+            fecha = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+            rendered = render_template("report.html", info=data, fecha=fecha)
             if export_pdf:
                 pdf_name = f"Reporte_Bateria-{data['computer_name']}-{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.pdf"
                 pdf_path = os.path.join(app.config["UPLOAD_FOLDER"], pdf_name)
