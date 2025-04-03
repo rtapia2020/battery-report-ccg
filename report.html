@@ -15,8 +15,34 @@
       from { opacity: 0; transform: scale(0.95); }
       to { opacity: 1; transform: scale(1); }
     }
-    h1, h2 {
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .header h1 {
       color: #bb86fc;
+      margin-bottom: 10px;
+    }
+    .action-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .action-buttons a {
+      padding: 12px 20px;
+      background-color: #bb86fc;
+      color: #121212;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 8px;
+      text-align: center;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    .action-buttons a:hover {
+      background-color: #9f6eff;
+      transform: scale(1.05);
     }
     .highlight, .summary {
       padding: 15px;
@@ -59,34 +85,20 @@
       color: #000;
       font-weight: bold;
     }
-    .buttons {
-      margin-top: 40px;
-      text-align: center;
-    }
-    .buttons a, .buttons button {
-      margin: 10px;
-      padding: 15px 25px;
-      font-size: 1.1em;
-      font-weight: bold;
-      background-color: #bb86fc;
-      color: #000;
-      border: none;
-      border-radius: 8px;
-      text-decoration: none;
-      display: inline-block;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-    }
-    .buttons a:hover, .buttons button:hover {
-      background-color: #9f6eff;
-      transform: scale(1.05);
-    }
   </style>
 </head>
 <body onload="document.getElementById('laser-audio').play()">
   <audio id="laser-audio" src="https://www.soundjay.com/button/beep-07.wav" preload="auto"></audio>
 
   <img src="https://iili.io/3AAXHxa.png" alt="Logo CCG" style="height:90px; margin-bottom:10px;">
-  <h1>Diagnóstico de batería legible CCG</h1>
+  <div class="header">
+    <h1>Diagnóstico de batería legible CCG</h1>
+    <div class="action-buttons">
+      <a href="/exportar-pdf">📄 Exportar a PDF</a>
+      <a href="/">🔁 Cargar nuevo reporte</a>
+    </div>
+  </div>
+
   <p><strong>Fecha del análisis:</strong> {{ fecha }}</p>
 
   <h2>Ficha Técnica del Equipo</h2>
@@ -124,14 +136,6 @@
   <div class="summary">
     <h2>Resumen</h2>
     <p>Este análisis resume el estado de salud de la batería y del equipo. Puedes usar este reporte como respaldo técnico o para diagnóstico con soporte.</p>
-  </div>
-
-  <div class="buttons">
-    <form method="POST">
-      <input type="hidden" name="batteryfile">
-      <button type="submit" name="export_pdf">📄 Exportar a PDF</button>
-    </form>
-    <a href="/">🔁 Cargar nuevo reporte</a>
   </div>
 
   <footer style="text-align:center; margin-top:40px; font-size:0.9em; color:#777;">
