@@ -87,7 +87,7 @@
     }
   </style>
 </head>
-<body onload="document.getElementById('laser-audio').play()">
+<body style="perspective: 1000px;"  onload="document.getElementById('laser-audio').play()">
   <audio id="laser-audio" src="https://www.soundjay.com/button/beep-07.wav" preload="auto"></audio>
 
   <img src="https://iili.io/3AAXHxa.png" alt="Logo CCG" style="height:90px; margin-bottom:10px;">
@@ -125,7 +125,7 @@
 
   <h2>Salud de la Batería</h2>
   <div class="bar-container">
-    <div class="bar" style="width: {{ info.health_percent }}%;">{{ info.health_percent }}%</div>
+    <div class="bar" style="width: {{ info.health_percent }}%; transition: width 1.5s ease-in-out, transform 0.5s;">{{ info.health_percent }}%</div>
   </div>
 
   <div class="highlight">
@@ -139,7 +139,7 @@
   </div>
 
   <footer style="text-align:center; margin-top:40px; font-size:0.9em; color:#777;">
-    Hecho con 🦣 por Dragon Info Sec
+    Corporative Consulting - Todos los derechos reservados 2025
   </footer>
 </body>
 </html>
