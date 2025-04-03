@@ -1,1 +1,105 @@
-<h1>Reporte Generado</h1><p>{{ info.computer_name }}</p>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Diagnóstico de batería legible CCG</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #121212;
+      color: #f5f5f5;
+      margin: 40px;
+    }
+    h1, h2 {
+      color: #00bcd4;
+    }
+    .highlight, .summary {
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 8px;
+    }
+    .highlight {
+      background-color: #333;
+      border-left: 5px solid #ffc107;
+    }
+    .summary {
+      background-color: #1b5e20;
+      border-left: 5px solid #81c784;
+    }
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    .data-table th, .data-table td {
+      border: 1px solid #444;
+      padding: 10px;
+      text-align: left;
+    }
+    .data-table th {
+      background-color: #212121;
+    }
+    .bar-container {
+      background-color: #444;
+      border-radius: 10px;
+      overflow: hidden;
+      height: 25px;
+      margin: 10px 0;
+    }
+    .bar {
+      height: 100%;
+      background-color: #00c853;
+      text-align: center;
+      line-height: 25px;
+      color: #000;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <img src="https://iili.io/3AAXHxa.png" alt="Logo CCG" style="height:60px; margin-bottom:10px;">
+  <h1>Diagnóstico de batería legible CCG</h1>
+  <p><strong>Fecha del análisis:</strong> {{ fecha }}</p>
+
+  <h2>Ficha Técnica del Equipo</h2>
+  <table class="data-table">
+    <tr><td>Nombre del equipo</td><td>{{ info.computer_name }}</td></tr>
+    <tr><td>Modelo</td><td>{{ info.system_product }}</td></tr>
+    <tr><td>BIOS</td><td>{{ info.bios }}</td></tr>
+    <tr><td>Versión del sistema operativo</td><td>{{ info.os_build }}</td></tr>
+    <tr><td>Rol de plataforma</td><td>{{ info.platform_role }}</td></tr>
+    <tr><td>Connected Standby</td><td>{{ info.connected_standby }}</td></tr>
+    <tr><td>Fecha del reporte</td><td>{{ info.report_time }}</td></tr>
+  </table>
+
+  <h2>Detalles del Reporte de Batería</h2>
+  <table class="data-table">
+    <tr><td>Nombre de la batería</td><td>{{ info.battery_name }}</td></tr>
+    <tr><td>Fabricante</td><td>{{ info.battery_manufacturer }}</td></tr>
+    <tr><td>Serial</td><td>{{ info.battery_serial }}</td></tr>
+    <tr><td>Química</td><td>{{ info.battery_chemistry }}</td></tr>
+    <tr><td>Capacidad de diseño</td><td>{{ info.design_capacity }} mWh</td></tr>
+    <tr><td>Capacidad de carga completa</td><td>{{ info.full_charge_capacity }} mWh</td></tr>
+    <tr><td>Conteo de ciclos</td><td>{{ info.cycle_count }}</td></tr>
+  </table>
+
+  <h2>Salud de la Batería</h2>
+  <div class="bar-container">
+    <div class="bar" style="width: {{ info.health_percent }}%;">{{ info.health_percent }}%</div>
+  </div>
+
+  <div class="highlight">
+    <p><strong>Recomendación:</strong> {{ info.recommendation }}</p>
+    <p>{{ info.estimated_life }}</p>
+  </div>
+
+  <div class="summary">
+    <h2>Resumen</h2>
+    <p>Este análisis resume el estado de salud de la batería y del equipo. Puedes usar este reporte como respaldo técnico o para diagnóstico con soporte.</p>
+  </div>
+
+  <footer style="text-align:center; margin-top:40px; font-size:0.9em; color:#777;">
+    Hecho con 🦣 por Dragon Info Sec
+  </footer>
+</body>
+</html>
