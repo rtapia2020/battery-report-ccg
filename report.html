@@ -9,40 +9,9 @@
       background-color: #121212;
       color: #f5f5f5;
       margin: 40px;
-      animation: fadeIn 1s ease-out;
     }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1); }
-    }
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-    .header h1 {
-      color: #bb86fc;
-      margin-bottom: 10px;
-    }
-    .action-buttons {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .action-buttons a {
-      padding: 12px 20px;
-      background-color: #bb86fc;
-      color: #121212;
-      text-decoration: none;
-      font-weight: bold;
-      border-radius: 8px;
-      text-align: center;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-    }
-    .action-buttons a:hover {
-      background-color: #9f6eff;
-      transform: scale(1.05);
+    h1, h2 {
+      color: #00bcd4;
     }
     .highlight, .summary {
       padding: 15px;
@@ -87,18 +56,9 @@
     }
   </style>
 </head>
-<body style="perspective: 1000px;"  onload="document.getElementById('laser-audio').play()">
-  <audio id="laser-audio" src="https://www.soundjay.com/button/beep-07.wav" preload="auto"></audio>
-
-  <img src="https://iili.io/3AAXHxa.png" alt="Logo CCG" style="height:90px; margin-bottom:10px;">
-  <div class="header">
-    <h1>Diagnóstico de batería legible CCG</h1>
-    <div class="action-buttons">
-      <a href="/exportar-pdf">📄 Exportar a PDF</a>
-      <a href="/">🔁 Cargar nuevo reporte</a>
-    </div>
-  </div>
-
+<body>
+  <img src="https://iili.io/3AAXHxa.png" alt="Logo CCG" style="height:60px; margin-bottom:10px;">
+  <h1>Diagnóstico de batería legible CCG</h1>
   <p><strong>Fecha del análisis:</strong> {{ fecha }}</p>
 
   <h2>Ficha Técnica del Equipo</h2>
@@ -125,7 +85,7 @@
 
   <h2>Salud de la Batería</h2>
   <div class="bar-container">
-    <div class="bar" style="width: {{ info.health_percent }}%; transition: width 1.5s ease-in-out, transform 0.5s;">{{ info.health_percent }}%</div>
+    <div class="bar" style="width: {{ info.health_percent }}%;">{{ info.health_percent }}%</div>
   </div>
 
   <div class="highlight">
@@ -139,13 +99,7 @@
   </div>
 
   <footer style="text-align:center; margin-top:40px; font-size:0.9em; color:#777;">
-    Corporative Consulting - Todos los derechos reservados 2025
-  
-    <div style="margin-top: 40px; text-align: center; font-style: italic; font-size: 0.95em; color: #888;">
-      Firma digital validada por Corporative Consulting<br>
-      ID: CCG-BAT-{{ info.computer_name }}-{{ fecha }}
-    </div>
-    </footer>
-    
+    Hecho con 🦣 por Dragon Info Sec
+  </footer>
 </body>
 </html>

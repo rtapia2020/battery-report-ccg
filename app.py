@@ -1,13 +1,10 @@
 from flask import Flask, render_template, request, send_file
-import json
 from bs4 import BeautifulSoup
 from datetime import datetime
 import os
 import pdfkit
 
-app = Flask(
-    __name__, template_folder=".")
-app.secret_key = 'supersecretkey'
+app = Flask(__name__, template_folder=".")
 UPLOAD_FOLDER = "."
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
@@ -77,7 +74,6 @@ def index():
             filepath = os.path.join(app.config["UPLOAD_FOLDER"], file.filename)
             file.save(filepath)
             data = analizar_reporte(filepath)
-            
             rendered = render_template("report.html", info=data, fecha=datetime.now().strftime("%d/%m/%Y %H:%M:%S"))
             if export_pdf:
                 pdf_name = f"Reporte_Bateria-{data['computer_name']}-{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.pdf"
