@@ -9,21 +9,35 @@
       background-color: #0d0d0d;
       color: #c2aaff;
       font-family: 'Orbitron', sans-serif;
-      text-align: center;
       padding: 60px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     h1 {
       font-size: 3em;
       margin-bottom: 20px;
       color: #bb86fc;
+      text-align: center;
     }
     img {
       max-width: 200px;
       margin: 30px auto;
       display: block;
     }
+    .container {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+      width: 100%;
+      max-width: 1000px;
+    }
     form {
-      margin-top: 30px;
+      flex: 1;
+      min-width: 300px;
+      text-align: center;
     }
     input[type="file"] {
       padding: 15px;
@@ -33,6 +47,7 @@
       border: 2px dashed #bb86fc;
       margin-bottom: 20px;
       cursor: pointer;
+      width: 100%;
     }
     label {
       display: block;
@@ -57,15 +72,31 @@
       background-color: #c792ea;
       transform: scale(1.05);
     }
+    .instructions {
+      flex: 1;
+      min-width: 300px;
+      border: 2px dashed #00ff00;
+      padding: 20px;
+      color: #c792ea;
+      font-size: 1em;
+      line-height: 1.6;
+    }
   </style>
 </head>
 <body>
   <h1>Subir reporte de batería</h1>
   <img src="https://iili.io/3AAXHxa.png" alt="Logo CCG">
-  <form action="/" method="POST" enctype="multipart/form-data">
-    <input type="file" name="batteryfile" accept=".html" required><br>
-    
-    <button type="submit">Analizar reporte</button>
-  </form>
+  <div class="container">
+    <form action="/" method="POST" enctype="multipart/form-data">
+      <input type="file" name="batteryfile" accept=".html" required><br>
+      <label><input type="checkbox" name="export_pdf"> Descargar automáticamente el reporte como PDF</label>
+      <button type="submit">Analizar reporte</button>
+    </form>
+    <div class="instructions">
+      <strong>¿Cómo usar esta herramienta?</strong><br><br>
+      Si deseas <strong>descargar automáticamente</strong> tu diagnóstico en formato PDF, simplemente marca la casilla de opción antes de hacer clic en “Analizar reporte”.<br><br>
+      Si sólo deseas <strong>ver el diagnóstico en pantalla</strong> sin descargar el archivo, desmarca la casilla y presiona el botón. ¡Así de fácil!
+    </div>
+  </div>
 </body>
 </html>
