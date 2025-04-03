@@ -90,18 +90,3 @@ def index():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(debug=True, host="0.0.0.0", port=port)
-
-
-
-@app.route("/exportar-pdf")
-def exportar_pdf():
-    try:
-        with open("last_report.json", "r", encoding="utf-8") as f:
-            report = json.load(f)
-            rendered = render_template("report.html", info=report["data"], fecha=report["fecha"])
-            pdf_name = f"Reporte_Bateria-{report['data']['computer_name']}-{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.pdf"
-            pdf_path = os.path.join(app.config["UPLOAD_FOLDER"], pdf_name)
-            pdfkit.from_string(rendered, pdf_path)
-            return send_file(pdf_path, as_attachment=True)
-    except Exception as e:
-        return f"Error generando PDF: {str(e)}", 500
