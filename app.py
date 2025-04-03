@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request, send_file, session, redirect, url_for
+from flask import Flask, render_template, request, send_file
+import json
 from bs4 import BeautifulSoup
 from datetime import datetime
 import os
@@ -76,8 +77,7 @@ def index():
             filepath = os.path.join(app.config["UPLOAD_FOLDER"], file.filename)
             file.save(filepath)
             data = analizar_reporte(filepath)
-            session['data'] = data
-            session['fecha'] = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
+            
             rendered = render_template("report.html", info=data, fecha=datetime.now().strftime("%d/%m/%Y %H:%M:%S"))
             if export_pdf:
                 pdf_name = f"Reporte_Bateria-{data['computer_name']}-{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.pdf"
@@ -92,12 +92,16 @@ if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=port)
 
 
+
 @app.route("/exportar-pdf")
 def exportar_pdf():
-    if "data" in session and "fecha" in session:
-        rendered = render_template("report.html", info=session["data"], fecha=session["fecha"])
-        pdf_name = f"Reporte_Bateria-{session['data']['computer_name']}-{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.pdf"
-        pdf_path = os.path.join(app.config["UPLOAD_FOLDER"], pdf_name)
-        pdfkit.from_string(rendered, pdf_path)
-        return send_file(pdf_path, as_attachment=True)
-    return "Reporte no disponible. Vuelve a subir el archivo.", 400
+    try:
+        with open("last_report.json", "r", encoding="utf-8") as f:
+            report = json.load(f)
+            rendered = render_template("report.html", info=report["data"], fecha=report["fecha"])
+            pdf_name = f"Reporte_Bateria-{report['data']['computer_name']}-{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.pdf"
+            pdf_path = os.path.join(app.config["UPLOAD_FOLDER"], pdf_name)
+            pdfkit.from_string(rendered, pdf_path)
+            return send_file(pdf_path, as_attachment=True)
+    except Exception as e:
+        return f"Error generando PDF: {str(e)}", 500
